@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import Card from '../../shared/component/UIElement/Card'
+import Button from '../../shared/component/FormElement/Button'
 import './PlaceList.css'
 import PlaceItem from './PlaceItem'
 
@@ -9,7 +10,7 @@ const PlaceList = (props) => {
 		return <div className="place-list center">
 			<Card>
 				<h2>沒有發現地點，要分享一個嗎</h2>
-				<button>分享</button>
+				<Button to="/place/new">分享</Button>
 			</Card>
 		</div>
 	}

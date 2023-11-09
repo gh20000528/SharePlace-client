@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Input from '../../shared/component/FormElement/Input'
 import Button from '../../shared/component/FormElement/Button'
+import Card from '../../shared/component/UIElement/Card'
 import { useForm } from '../../shared/hooks/form-hook'
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../shared/component/util/validators'
 import './NewPlace.css'
@@ -75,17 +76,19 @@ const UpdatePlace = (props) => {
 	const identifiedPlace = DUMMY_PLACE.find(p => p.id === placeId)
 	
 	useEffect(() => {
-		setFormData({
-			title:{
-				value: identifiedPlace.title,
-				isValid:true
-			},
-			description: {
-				value: identifiedPlace.description,
-				isValid: true
-			}
-		}, true)
-		setIsLoading(false)
+		if(identifiedPlace){
+			setFormData({
+				title:{
+					value: identifiedPlace.title,
+					isValid:true
+				},
+				description: {
+					value: identifiedPlace.description,
+					isValid: true
+				}
+			}, true)
+			setIsLoading(false)
+		}
 	},[setFormData, identifiedPlace])
 
 	
@@ -97,7 +100,9 @@ const UpdatePlace = (props) => {
 	if(!identifiedPlace){
 		return(
 			<div className="center">
-				<h2>沒有找到你要的</h2>
+				<Card className="w-1/2 text-white bg-gray-500">
+					<h2>沒有找到你要的</h2>
+				</Card>
 			</div>
 		)
 	}
