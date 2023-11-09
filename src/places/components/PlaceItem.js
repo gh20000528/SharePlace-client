@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Card from '../../shared/component/UIElement/Card'
 import './PlaceItem.css'
 import Button  from '../../shared/component/FormElement/Button'
 import Modal from '../../shared/component/UIElement/Model'
 import Map from '../../shared/component/UIElement/Map'
+import { AuthContext } from '../../shared/context/auth-context'
 
 const PlaceItem = props => {
+	const auth = useContext(AuthContext)
 	const [showMap, setShowMap] = useState(false)
 	const [showConfirmModal, setShowConfirmModal] = useState(false)
 
@@ -67,8 +69,8 @@ const PlaceItem = props => {
 					</div>
 					<div className='place-item__actions'>
 						<Button inverse onClick={openMapHandler}>在地圖上檢視</Button>
-						<Button to={`/place/${props.id}`}>修改</Button>
-						<Button danger onClick={showDeleteHandler}>刪除</Button>
+						{auth.isLoggedIn && <Button to={`/place/${props.id}`}>修改</Button>}
+						{auth.isLoggedIn && <Button danger onClick={showDeleteHandler}>刪除</Button>}
 					</div>
 				</Card>
 			</li>
